@@ -1,0 +1,275 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: May 23, 2020 at 07:15 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.5
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `web`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category`
+--
+
+CREATE TABLE `category` (
+  `CatID` int(11) NOT NULL,
+  `Cat_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`CatID`, `Cat_name`) VALUES
+(1, 'MacBook'),
+(2, 'ASUS'),
+(3, 'DELL'),
+(4, 'HP'),
+(5, 'ACER');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer`
+--
+
+CREATE TABLE `customer` (
+  `CusID` int(11) NOT NULL,
+  `Name` varchar(55) NOT NULL,
+  `birthday` date NOT NULL,
+  `Address` varchar(255) DEFAULT NULL,
+  `email` varchar(25) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `Password` varchar(200) NOT NULL,
+  `gender` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`CusID`, `Name`, `birthday`, `Address`, `email`, `phone`, `Password`, `gender`) VALUES
+(6, 'nguyễn quốc vỹ', '0000-00-00', 'quận bình thạnh', 'vvv', '0981749381', 'vvv', 'Male'),
+(13, 'nguyen van luy', '1976-03-21', 'tay ninh  city', 'luy@gmail.com', '0904905260', 'nguyenvanluy', 'Male');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orther`
+--
+
+CREATE TABLE `orther` (
+  `OrID` int(11) NOT NULL,
+  `Ortherdate` datetime NOT NULL,
+  `CusID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `orther`
+--
+
+INSERT INTO `orther` (`OrID`, `Ortherdate`, `CusID`) VALUES
+(2, '2020-05-23 00:00:00', 6),
+(3, '2020-05-23 00:00:00', 6),
+(4, '2020-05-23 00:00:00', 6),
+(5, '2020-05-23 00:00:00', 6),
+(6, '2020-05-23 00:00:00', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ortherdetail`
+--
+
+CREATE TABLE `ortherdetail` (
+  `OrID` int(11) NOT NULL,
+  `ProID` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `unitprice` varchar(200) NOT NULL,
+  `Ortherdetail_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ortherdetail`
+--
+
+INSERT INTO `ortherdetail` (`OrID`, `ProID`, `quantity`, `unitprice`, `Ortherdetail_date`) VALUES
+(2, 27, 1, '1000USD', '0000-00-00 00:00:00'),
+(2, 32, 1, '1999USD', '0000-00-00 00:00:00'),
+(2, 34, 1, '1000USD', '0000-00-00 00:00:00'),
+(3, 27, 1, '1000USD', '0000-00-00 00:00:00'),
+(3, 32, 1, '1999USD', '0000-00-00 00:00:00'),
+(3, 34, 1, '1000USD', '0000-00-00 00:00:00'),
+(4, 28, 1, '1000USD', '0000-00-00 00:00:00'),
+(5, 28, 1, '1000USD', '0000-00-00 00:00:00'),
+(6, 28, 1, '1000USD', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE `product` (
+  `ProID` int(11) NOT NULL,
+  `pro_name` varchar(55) NOT NULL,
+  `CatID` int(11) NOT NULL,
+  `image` varchar(200) NOT NULL,
+  `price` varchar(200) NOT NULL,
+  `Status` varchar(250) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`ProID`, `pro_name`, `CatID`, `image`, `price`, `Status`) VALUES
+(27, 'ASUS', 2, '../images/imagesproducts/noteasus1.jpg', '1000USD', 'aaaaa'),
+(28, 'macbook', 1, '../images/imagesproducts/notemacbook.jpg', '1000USD', 'not'),
+(30, 'HP', 4, '../images/imagesproducts/notehp1.jpg', '1000USD', ''),
+(31, 'DELL', 3, '../images/imagesproducts/notedell2.jpg', '999USD', 'not'),
+(32, 'ASUS 2', 2, '../images/imagesproducts/noteasus4.jpg', '1999USD', ''),
+(33, 'macbook2', 1, '../images/imagesproducts/notemacbook1.jpg', '1999USD', ''),
+(34, 'HP1', 4, '../images/imagesproducts/notehp2.jpg', '1000USD', ''),
+(35, 'DELL1', 3, '../images/imagesproducts/notedell3.jpg', '1000USD', ''),
+(38, 'macbook14', 1, '../images/imagesproducts/notemacbook3.jpg', '1999USD', 'not'),
+(39, 'ASUS 13', 2, '../images/imagesproducts/noteasus2.jpg', '1199 USD', 'not'),
+(41, 'ASUS 15', 2, '../images/imagesproducts/noteasus3.jpg', '1888USD', ''),
+(45, 'DELL15', 3, '../images/imagesproducts/notedell4.jpg', '1999USD', ''),
+(46, 'hp 14', 4, '../images/imagesproducts/note13863133.jpg', '1000USD', 'not'),
+(47, 'Acer', 5, '../images/imagesproducts/notedownload.jpg', '999USD', 'not'),
+(48, 'Acer 13', 5, '../images/imagesproducts/notedownload (2).jpg', '1199USD', 'no'),
+(49, 'Acer 14', 5, '../images/imagesproducts/notedownload (3).jpg', '1999USD', 'not');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `UserName` varchar(55) NOT NULL,
+  `Password` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`UserName`, `Password`) VALUES
+('admin', 'admin');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`CatID`);
+
+--
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`CusID`);
+
+--
+-- Indexes for table `orther`
+--
+ALTER TABLE `orther`
+  ADD PRIMARY KEY (`OrID`),
+  ADD KEY `FK_CustomerOrder` (`CusID`);
+
+--
+-- Indexes for table `ortherdetail`
+--
+ALTER TABLE `ortherdetail`
+  ADD PRIMARY KEY (`OrID`,`ProID`),
+  ADD KEY `FK_pro` (`ProID`);
+
+--
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`ProID`),
+  ADD KEY `FK_Cat` (`CatID`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`UserName`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `CatID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `CusID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `orther`
+--
+ALTER TABLE `orther`
+  MODIFY `OrID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `ProID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `orther`
+--
+ALTER TABLE `orther`
+  ADD CONSTRAINT `FK_CustomerOrder` FOREIGN KEY (`CusID`) REFERENCES `customer` (`CusID`);
+
+--
+-- Constraints for table `ortherdetail`
+--
+ALTER TABLE `ortherdetail`
+  ADD CONSTRAINT `FK_Or` FOREIGN KEY (`OrID`) REFERENCES `orther` (`OrID`),
+  ADD CONSTRAINT `FK_pro` FOREIGN KEY (`ProID`) REFERENCES `product` (`ProID`);
+
+--
+-- Constraints for table `product`
+--
+ALTER TABLE `product`
+  ADD CONSTRAINT `FK_Cat` FOREIGN KEY (`CatID`) REFERENCES `category` (`CatID`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
